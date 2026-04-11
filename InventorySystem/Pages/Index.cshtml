@@ -1,18 +1,46 @@
 ﻿@page
 @model IndexModel
+
 @{
     ViewData["Title"] = "Home page";
 }
-
+<!-- Welcome to the Inventory System header -->
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to the Inventory System</h1>
+    <p><a href="/Product">Add A New Product</a>.</p>
 </div>
+
+<!-- Display the list of products in a table format -->
 <table class="table">
-   <thead><tr>
-      <th>Product Name</th>
-      <th>Product Price</th>
-      <th>Product Description</th>
-      <th>Product Stock Quantity</th>
-   </tr></thead>
-   <tbody>
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Product Description</th>
+            <th>Product Stock Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    <!-- Check if there are products to display -->
+    @if (Model.Products != null)
+    {
+        foreach (var p in Model.Products)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Price.ToString("C")</td>
+                <td>@p.Description</td>
+                <td>@p.StockQuantity</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <!-- Display a message if no products are found -->
+            <td>No Products found!!!</td>
+        </tr>
+    }
+    </tbody>
+</table>

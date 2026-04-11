@@ -1,0 +1,64 @@
+﻿@page
+@model MyApp.Namespace.ProductModel
+@{
+    // Page title 
+    ViewData["Title"] = "Add New Product";
+}
+<!-- Display the page title -->
+<h1>@ViewData["Title"]</h1>
+<!-- Form for adding a new product -->
+<form method="post" class ="row g-3">
+    <div class="form-group">
+        <!-- Label and input for product name with validation message -->
+        <label asp-for="Input.Name"></label>
+        <input asp-for="Input.Name" class="form-control" />
+        <span asp-validation-for="Input.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <!-- Label and input for product price with validation message -->
+        <label asp-for="Input.Price"></label>
+        <input asp-for="Input.Price" class="form-control" />
+        <span asp-validation-for="Input.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <!-- Label and input for product description with validation message -->
+        <label asp-for="Input.Description"></label>
+        <input asp-for="Input.Description" class="form-control" />
+        <span asp-validation-for="Input.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <!-- Label and input for product stock quantity with validation message -->
+        <label asp-for="Input.StockQuantity"></label>
+        <input asp-for="Input.StockQuantity" class="form-control" />
+        <span asp-validation-for="Input.StockQuantity" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-large btn-info">Add Product</button>
+</form>
+<!-- Display the list of products in a table format -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+    <!-- Check if there are products to display -->
+    @if (Model.Products != null)
+    {
+        @foreach (var p in Model.Products)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Name</td>
+                <td>@p.Price.ToString("C")</td>
+                <td>@p.Description</td>
+                <td>@p.StockQuantity</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
